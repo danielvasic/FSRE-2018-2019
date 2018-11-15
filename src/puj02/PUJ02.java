@@ -6,8 +6,6 @@
 package puj02;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
@@ -21,18 +19,17 @@ public class PUJ02 {
      */
     public static void main(String[] args) {
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            String connectionString = "jdbc:mysql://localhost/fsre-puj?user=root&password=csdigital&useSSL=false";
-            Connection connection = DriverManager.getConnection(connectionString);
-            
+            Connection connection = new db.Connection().getConnection();
+
+            //Statement query = connection.createStatement();
+            //query.executeUpdate("INSERT INTO korisnik VALUES(null, 'Daniel', 'Vasic', '1234567891222', 'daniel.vasic@fpmoz.sum.ba')");
+
             Statement query = connection.createStatement();
-            query.executeUpdate("INSERT INTO korisnik VALUES(null, 'Daniel', 'Vasic', '1234567891222', 'daniel.vasic@fpmoz.sum.ba')");
-        
-        } catch (ClassNotFoundException ex) {
-            System.out.println("Nisam našao klasu...");
-        } catch (SQLException ex) {
+            String sql = "UPDATE korisnik SET email='dvasic1@gmail.com' WHERE id=1";
+            query.executeUpdate(sql);
+
+        } catch (Exception ex) {
             System.out.println("Greska: " + ex.getMessage());
         }
     }
-    
 }
