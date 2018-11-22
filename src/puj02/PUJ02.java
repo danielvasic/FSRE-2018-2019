@@ -5,6 +5,8 @@
  */
 package puj02;
 
+import model.Korisnik;
+
 import java.sql.Connection;
 import java.sql.Statement;
 
@@ -18,18 +20,20 @@ public class PUJ02 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        try {
-            Connection connection = new db.Connection().getConnection();
+        Korisnik k = new Korisnik(
+                0,
+                "Pero",
+                "Perić",
+                "1234567891221",
+                "pero@gmail.com");
+        k.create();
 
-            //Statement query = connection.createStatement();
-            //query.executeUpdate("INSERT INTO korisnik VALUES(null, 'Daniel', 'Vasic', '1234567891222', 'daniel.vasic@fpmoz.sum.ba')");
-
-            Statement query = connection.createStatement();
-            String sql = "UPDATE korisnik SET email='dvasic1@gmail.com' WHERE id=1";
-            query.executeUpdate(sql);
-
-        } catch (Exception ex) {
-            System.out.println("Greska: " + ex.getMessage());
-        }
+        Korisnik k1 = new Korisnik(
+                0,
+                "Ivo",
+                "Ivić",
+                "1234567891232",
+                "ivo@gmail.com");
+        k1.create();
     }
 }
